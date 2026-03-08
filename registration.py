@@ -1,12 +1,17 @@
 import open3d as o3d
 import numpy as np
 
+
 def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np.ndarray:
-    """
-    This is the function that students will implement.
-    It should take two open3d.geometry.PointCloud objects as input
-    and return a 4x4 numpy array representing the transformation matrix
-    that aligns pcd2 to pcd1.
-    """
-    # Placeholder implementation: returns an identity matrix
-    return np.identity(4)
+    threshold = 0.2 #points match only eza baynetoun 0.2 units b3ad aan baaed 
+    initial_transformation = np.eye(4) #strating transf, baaden men aabbe fiya transl and rot 
+
+    result = o3d.pipelines.registration.registration_icp(
+        pcd1,
+        pcd2,
+        threshold,
+        initial_transformation,
+        o3d.pipelines.registration.TransformationEstimationPointToPoint(), #meth that estimates the rigid transf
+    )
+
+    return result.transformation
