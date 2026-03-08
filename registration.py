@@ -33,27 +33,14 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
 
     distance_threshold = voxel_size * 1.5
 
-    ransac_result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
+    global_result = o3d.pipelines.registration.registration_fgr_based_on_feature_matching(
         source_down,
         target_down,
         source_fpfh,
         target_fpfh,
-        mutual_filter=True, #only mutual nearest-neighbor feature matches.
-        max_correspondence_distance=distance_threshold,
-        estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPoint(False),
-        ransac_n=4, #Every trial picks 4 correspondences 
-        checkers=[
-            # byorfoud feature matches that are locally inconsistent. 
-            # eza aande 2 src points fi fare2 byanoun distance x
-            # lezim l matching target points tabaaouun ykoun fi baynoun x            
-            o3d.pipelines.registration.CorrespondenceCheckerBasedOnEdgeLength(0.9),
-            
-            #byorfoud transforms that fit the sampled points but not the cloud overall, 
-            # eza ma keno domn l dist_threshold
-            o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(distance_threshold),
-        ],
-        #max iterations, confidence target
-        criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(100000, 0.999),
+        o3d.pipelines.registration.FastGlobalRegistrationOption(
+            maximum_correspondence_distance=distance_threshold
+        ),
     )
 
     #est normals again laenno ho full res holik downsample w b3ouz lal PtoPlane
@@ -68,7 +55,7 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
         pcd1,
         pcd2,
         max_correspondence_distance=0.025,
-        init=ransac_result.transformation,
+        init=global_result.transformation,
         estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPlane(),
     )
 

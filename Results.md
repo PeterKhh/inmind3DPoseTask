@@ -159,9 +159,17 @@ Changed: ```distance_threshold = voxel_size * 2```
 >No Improvement. Keeping initial.
 
 # Additional Adjustment:
+## Multi-scale ICP refinement
 Tried Multi-scale ICP refinement where I did three passes:
 * ICP at 0.05
 * then ICP at 0.025
 * then ICP at 0.01
 
 But didn't give any improvements.
+
+## Fast Global Registration
+Replaced RANSAC with FGR as initial coarse aligment. Gave a bit of a boost on runtime speed.
+``` 
+0.9637 s --> 0.8875 s.
+```
+
