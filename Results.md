@@ -7,6 +7,7 @@ Registration accuracy metrics:
   Fitness: 0.00 %
   Inlier RMSE: 0.0000
   Correspondences found: 0
+  Visual Alignment: Way off
 ```
 
 ### First changes:
