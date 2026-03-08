@@ -31,7 +31,7 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
     source_down, source_fpfh = preprocess_point_cloud(pcd1, voxel_size)
     target_down, target_fpfh = preprocess_point_cloud(pcd2, voxel_size)
 
-    distance_threshold = voxel_size * 1.5
+    distance_threshold = voxel_size * 2
 
     ransac_result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
         source_down,

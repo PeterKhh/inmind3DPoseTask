@@ -150,4 +150,10 @@ Visual alignment: Very Good       ++
 ### 7B: Voxel size:
 Smaller voxel sizes keep more geometric details
 ``` voxel_size = 0.04 ``` showed no meaningful improvement. Stsying at 0.05
- 
+
+### 7C: RANSAC threshold:
+A slightly looser RANSAC threshold can allow more candidate correspondences in the global stage.
+
+Initial: ```distance_threshold = voxel_size * 1.5```
+Changed: ```distance_threshold = voxel_size * 2```
+>No Improvement. Keeping initial.
