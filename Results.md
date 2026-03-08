@@ -157,3 +157,11 @@ A slightly looser RANSAC threshold can allow more candidate correspondences in t
 Initial: ```distance_threshold = voxel_size * 1.5```
 Changed: ```distance_threshold = voxel_size * 2```
 >No Improvement. Keeping initial.
+
+# Additional Adjustment:
+Tried Multi-scale ICP refinement where I did three passes:
+* ICP at 0.05
+* then ICP at 0.025
+* then ICP at 0.01
+
+But didn't give any improvements.
