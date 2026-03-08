@@ -10,7 +10,7 @@ Visual Alignment: Way off
 
 # Step 1:
 ### ICP (Iterative Closest Point)
-Basic explanation: La kel source point bel pcd ble2e wahde aerab wahde ela, beaddir a transform that will make them match, I apply it and then I repeat la hadd ma yelte2o.
+Basic explanation: La kel source point bel PCD ble2e wahde aerab wahde ela, beaddir a transform that will make them match, I apply it and then I repeat la hadd ma yelte2o.
 
 Limitations:
 * Needs to have a close initial guess
