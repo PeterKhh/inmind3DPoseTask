@@ -19,9 +19,9 @@ def main():
     additional_transform[:3, 3] = additional_translation  # set translation part
     
     pcd.transform(additional_transform)  # Apply initial misalignment to source pcd
-    print(f"Applied additional misalignment: rotation={[0.3, 0.5, 0.2]} rad, translation={additional_translation}")
+    # print(f"Applied additional misalignment: rotation={[0.3, 0.5, 0.2]} rad, translation={additional_translation}")
 
-    print("Visualizing source and target point clouds before registration.")
+    # print("Visualizing source and target point clouds before registration.")
     o3d.visualization.draw_geometries([pcd, pcd_transformed],
                                       window_name="Before Registration")
 
@@ -30,7 +30,7 @@ def main():
     transformation = register(pcd, pcd_transformed)
     end_time = time.time()
 
-    print(f"Registration took {end_time - start_time:.4f} seconds.")
+    print(f"Registration took {end_time - start_time:.4f} s.")
 
     # Compute registration accuracy metrics
 
@@ -42,13 +42,13 @@ def main():
     evaluation = o3d.pipelines.registration.evaluate_registration(
         pcd, pcd_transformed, distance_threshold)
     
-    print(f"Registration accuracy metrics:")
+    # print(f"Registration accuracy metrics:")
     print(f"  Fitness: {evaluation.fitness*100:.2f} %")  # fraction of target points with correspondences found
     print(f"  Inlier RMSE: {evaluation.inlier_rmse:.4f}")  # RMSE of corresponding points
     print(f"  Correspondences found: {len(evaluation.correspondence_set)}")
     
     # Visualize the alignment
-    print("Visualizing source and target point clouds after registration.")
+    # print("Visualizing source and target point clouds after registration.")
     o3d.visualization.draw_geometries([pcd, pcd_transformed],
                                       window_name="After Registration")
 
