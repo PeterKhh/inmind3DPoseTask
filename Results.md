@@ -141,3 +141,9 @@ Inlier RMSE: 0.0066               +++
 Correspondences found: 123490     +++
 Visual alignment: Very Good       ++
 ```
+# Step 7
+### Tuning parameters
+### 7A: correspondence threshold:
+* 0.02: 1.3497 s
+* 0.015: 1.2398 s.
+* 0.025: 0.9637 s <<< Chose to keep this one.

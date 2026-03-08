@@ -67,7 +67,7 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
     icp_result = o3d.pipelines.registration.registration_icp(
         pcd1,
         pcd2,
-        max_correspondence_distance=0.02,
+        max_correspondence_distance=0.03,
         init=ransac_result.transformation,
         estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPlane(),
     )
