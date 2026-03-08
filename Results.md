@@ -33,3 +33,21 @@ Registration accuracy metrics:
   Visual Alignment: Way off
 
 ```
+
+As u may notice ICP didn't do much since it was a far first guess. This is why step 2 will include a better guess.
+
+## Step 2
+### Centroid Alignment
+Before running ICP, I will first translate the source cloud so that its center matches the target cloud’s center.
+
+Main line: ```initial_transformation[:3, 3] = target_center - source_center```
+
+```
+Registration took 6.4109 seconds.
+Registration accuracy metrics:
+  Fitness: 8.57 %
+  Inlier RMSE: 0.0123
+  Correspondences found: 17045
+  Visual Alignment: Bad
+```
+
