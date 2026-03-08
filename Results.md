@@ -147,3 +147,7 @@ Visual alignment: Very Good       ++
 * 0.02: 1.3497 s
 * 0.015: 1.2398 s.
 * 0.025: 0.9637 s <<< Chose to keep this one.
+### 7B: Voxel size:
+Smaller voxel sizes keep more geometric details
+``` voxel_size = 0.04 ``` showed no meaningful improvement. Stsying at 0.05
+ 
