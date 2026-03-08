@@ -90,3 +90,27 @@ Inlier RMSE: 0.0121               -
 Correspondences found: 18582      -
 Visual alignment: Very Bad        -
 ```
+
+# Step 5
+### Normals and Point to Plane ICP
+Main idea: 
+
+FPFH describes the local shape around a point using: ```fpfh : Fast Point Feature Histogram```
+* the point position
+* neighboring points
+* normals
+
+RANSAC tries to align the clouds by:
+* matching points using FPFH descriptors
+* sampling candidate correspondences
+* testing rigid transforms
+* keeping the best one
+
+## Run Results
+```
+Registration took 0.3063 s        -
+Fitness: 47.78 %                  +++++
+Inlier RMSE: 0.0105               ++
+Correspondences found: 95005      +++++
+Visual alignment: Good            ++
+```
