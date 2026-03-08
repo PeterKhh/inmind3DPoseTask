@@ -41,7 +41,7 @@ Main line: ```initial_transformation[:3, 3] = target_center - source_center```
 
 ## Run Results
 ```
-Registration took 6.4109 seconds. -----
+Registration took 6.4109 s        -----
 Fitness: 8.57 %                   ++
 Inlier RMSE: 0.0123             
 Correspondences found: 17045
@@ -59,14 +59,17 @@ Helps with:
 * processing
 * alignment
 
-Main line: ```initial_transformation[:3, 3] = target_center - source_center```
+Main idea: reducing cubes of points to a point that represents. Most often using mean values...
 
 ## Run Results
 
 ```
-Registration took 0.0612 seconds. +++++
+Registration took 0.0612 s        +++++
 Fitness: 8.98 %                   +
 Inlier RMSE: 0.0117               -
 Correspondences found: 17853      +
 Visual alignment: Bad (same as step before)
 ```
+
+# Step 4
+### Normals and Point to Plane ICP
