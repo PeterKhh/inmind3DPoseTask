@@ -33,7 +33,7 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
 
     distance_threshold = voxel_size * 1.5
 
-    result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
+    ransac_result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
         source_down,
         target_down,
         source_fpfh,
@@ -56,4 +56,20 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
         criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(100000, 0.999),
     )
 
-    return result.transformation
+    #est normals again laenno ho full res holik downsample w b3ouz lal PtoPlane
+    pcd1.estimate_normals(
+        o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=30)
+    )
+    pcd2.estimate_normals(
+        o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=30)
+    )
+
+    icp_result = o3d.pipelines.registration.registration_icp(
+        pcd1,
+        pcd2,
+        max_correspondence_distance=0.02,
+        init=ransac_result.transformation,
+        estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPlane(),
+    )
+
+    return icp_result.transformation

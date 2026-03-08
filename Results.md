@@ -92,8 +92,7 @@ Visual alignment: Very Bad        -
 ```
 
 # Step 5
-### Normals and Point to Plane ICP
-Main idea: 
+### RANSAC and FPFH
 
 FPFH describes the local shape around a point using: ```fpfh : Fast Point Feature Histogram```
 * the point position
@@ -113,4 +112,32 @@ Fitness: 47.78 %                  +++++
 Inlier RMSE: 0.0105               ++
 Correspondences found: 95005      +++++
 Visual alignment: Good            ++
+```
+
+# Step 6
+### Refine RANSAC result with ICP
+Main idea: Use the RANSAC transform as the initial guess, then let ICP refine it for tighter alignment.
+RANSAC gives a good coarse alignment. (rough pose)
+ICP is best at fine alignment. (precision)
+
+ICP is a local optimizer. We run RANSAC, throw it to ICP as initial guess in:
+```
+o3d.pipelines.registration.registration_icp(
+        ...,
+        ..,
+        ...,
+        init=ransac_result.transformation,
+        ...,
+    )
+```
+
+This way it starts from a much better guess and goes to find a better alignment
+
+## Run Results
+```
+Registration took 1.3497 s        ---
+Fitness: 62.11 %                  +++
+Inlier RMSE: 0.0066               +++
+Correspondences found: 123490     +++
+Visual alignment: Very Good       ++
 ```
