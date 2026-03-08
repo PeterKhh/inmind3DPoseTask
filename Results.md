@@ -73,3 +73,20 @@ Visual alignment: Bad (same as step before)
 
 # Step 4
 ### Normals and Point to Plane ICP
+Main idea: Instead of focus on minimizing point to point distance, it minimizes the distance to the surface of the matched point. We will be using the normals.
+
+While estimating normals:
+* radius: neighborhood to consider for each normal (voxel size * 2 is standard).
+* max_nn: max number of nearby points for each normal 
+
+Main line: ``` TransformationEstimationPointToPlane() ```
+
+## Run Results
+
+```
+Registration took 0.1258 s        -
+Fitness: 9.35 %                   +
+Inlier RMSE: 0.0121               -
+Correspondences found: 18582      -
+Visual alignment: Very Bad        -
+```

@@ -43,9 +43,9 @@ def main():
         pcd, pcd_transformed, distance_threshold)
     
     # print(f"Registration accuracy metrics:")
-    print(f"  Fitness: {evaluation.fitness*100:.2f} %")  # fraction of target points with correspondences found
-    print(f"  Inlier RMSE: {evaluation.inlier_rmse:.4f}")  # RMSE of corresponding points
-    print(f"  Correspondences found: {len(evaluation.correspondence_set)}")
+    print(f"Fitness: {evaluation.fitness*100:.2f} %")  # fraction of target points with correspondences found
+    print(f"Inlier RMSE: {evaluation.inlier_rmse:.4f}")  # RMSE of corresponding points
+    print(f"Correspondences found: {len(evaluation.correspondence_set)}")
     
     # Visualize the alignment
     # print("Visualizing source and target point clouds after registration.")

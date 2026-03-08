@@ -8,6 +8,14 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
     #downsampling the pcds
     source_down = pcd1.voxel_down_sample(voxel_size) 
     target_down = pcd2.voxel_down_sample(voxel_size)
+
+    #finding normals of the PCDs
+    source_down.estimate_normals(
+        search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=30)
+    )
+    target_down.estimate_normals(
+        search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=30)
+    )
     
     #computing centers of the 2 pcds
     source_center = source_down.get_center()
@@ -22,7 +30,7 @@ def register(pcd1: o3d.geometry.PointCloud, pcd2: o3d.geometry.PointCloud) -> np
         target_down,
         threshold,
         initial_transformation,
-        o3d.pipelines.registration.TransformationEstimationPointToPoint(), #meth that estimates the rigid transf
+        o3d.pipelines.registration.TransformationEstimationPointToPlane(), #meth that estimates the rigid transf
     )
 
     return result.transformation
