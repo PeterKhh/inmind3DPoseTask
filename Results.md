@@ -173,7 +173,7 @@ Tried Multi-scale ICP refinement where I did three passes:
 
 But didn't give any improvements.
 
-##Generalized ICP
+## Generalized ICP
 Replaced ICP with GICP and gave no notable improvements.
 
 
